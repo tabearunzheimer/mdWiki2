@@ -72,7 +72,7 @@ header{
   
   /* Style page content */
   #main {
-    padding-top: 70px;
+    padding-top: 70px!important;
     margin-left: 180px; /* Same as the width of the sidebar */
     padding: 12px 10px;
   }

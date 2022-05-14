@@ -1,6 +1,6 @@
 {
   "name": "mdwiki",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Use your existing md-files to create a server to host your wiki",
   "main": "dist/index.js",
   "scripts": {
