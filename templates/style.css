@@ -93,3 +93,7 @@ header{
 .hide{
     display: none!important;
 }
+
+.active-doc{
+  color: #f1f1f1!important;
+}

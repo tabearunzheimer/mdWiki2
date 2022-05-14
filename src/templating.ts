@@ -14,7 +14,9 @@ export function createCustomTemplate(env: Env) {
         checkColorEnvs(file, env);
     }
     fs.writeFileSync(path.join(__dirname, "..", "public", "style.css"), file, 'utf8');
-
+    fs.copyFile(path.join(__dirname, "..", "templates", "loader.js"), path.join(__dirname, "..", "public", "loader.js"), (err) => {
+        console.error(err);
+    });
 }
 
 function checkColorEnvs(file: string, env: Env) {

@@ -1,6 +1,7 @@
 let showdown = require('showdown');
 import * as fs from "fs";
 import { Path } from "typescript";
+import { WS } from "./services/websocket";
 let path = require('path');
 
 export class MdConverter {
@@ -10,18 +11,27 @@ export class MdConverter {
     private source: string;
     public index: {[key:number]: any};
     private navbar: string;
+    private ws: WS;
 
-    constructor(source: string, targetPath: string) {
+    constructor(source: string, targetPath: string, io: WS) {
         this.converter = new showdown.Converter();
         this.source = source.replace(/\\/g, "/").replace(/^\.\//, ""); //if './' in path remove
         this.target = targetPath.replace(/\\/g, "/").replace(/^\.\//, ""); //if './' in path remove
         this.index = {};
         this.navbar = "";
+        this.ws = io;
         const exists = this.checkFolder(this.target);
         if (exists) this.readFolder(source);
-        console.log(this.index);
         this.createNavBar();
         
+    }
+
+    init(){
+        this.navbar = "";
+        this.index = {};
+        this.readFolder(this.source);
+        this.createNavBar();
+        this.ws.sendUpdateRequest();
     }
 
     checkFolder(path: string) {
@@ -37,10 +47,6 @@ export class MdConverter {
         const buffer = fs.readFileSync(htmlpath);
         const file = buffer.toString();
         var result = file.replace("<!--SIDENAV_REPLACE-->", this.navbar);
-        console.log("this.navbar");
-        console.log(this.navbar);
-        
-
         fs.writeFileSync(path.join(__dirname, "..", "public", "index.html"), result, 'utf8');
     }
 
@@ -114,7 +120,7 @@ export class MdConverter {
 
     createFrontendDocEntry(path: string, indize: number) {
         const name = path.match(/[\w()\[\]]+\.md$/);
-        this.navbar += `<div class="docEntry" onclick=loadContent(this) value='${indize}'>${name}</div>\n`
+        this.navbar += `<div id="nav-doc-${indize}" class="docEntry" onclick=loadContent(this) value='${indize}'>${name}</div>\n`
     }
 
 }

@@ -3,6 +3,8 @@ import { Request, Response } from 'express';
 import { load } from 'ts-dotenv';
 import { MdConverter } from './converter';
 import { envSchema } from './models';
+import { startFileWatcher } from './services/observer';
+import { WS } from './services/websocket';
 import { createCustomTemplate } from './templating';
 
 let path = require('path');
@@ -13,25 +15,33 @@ const env = load(envSchema)
 
 
 const app = express();
+const server = require('http').createServer(app);
 const port = env.PORT;
 
 const sourcePath = env.DATA_PATH;
 const renderedPath = env.RENDER_PATH;
 
-const converter = new MdConverter(sourcePath, renderedPath);
+const ws = new WS(server);
+
+const converter = new MdConverter(sourcePath, renderedPath, ws);
 createCustomTemplate(env);
 
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
 app.get("/:dok", async (req: Request, res: Response) => {
   const dok = req.params.dok;
-  console.log("dok", dok);
-  console.log(converter.index);
-  const file = path.join(__dirname, "..", converter.index[dok]);
-  console.info(`Loading file ${file}`);
-  res.sendFile(file);
+  if (!converter.index[dok]) res.status(500).json("Couldn't find file")
+  else {
+    const file = path.join(__dirname, "..", converter.index[dok]);
+    console.info(`Loading file ${file}`);
+    res.setHeader("page-value", dok);
+    res.sendFile(file);
+  }
 })
 
-app.listen(port, function () {
+server.listen(port, function () {
   console.log(`Server is listening on port ${port}`)
 });
+
+
+startFileWatcher(sourcePath, converter);
