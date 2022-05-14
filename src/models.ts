@@ -2,31 +2,31 @@ import { EnvSchema } from "ts-dotenv"
 
 export const envSchema: EnvSchema = {
     HEADER_BACKGROUND_COLOR: {
-        type: /^#[0-9A-F]{6}$/,
+        type: /^#[0-9A-Fa-f]{6}$/,
         optional: true,
     },
     HEADER_COLOR: {
-        type: /^#[0-9A-F]{6}$/,
+        type: /^#[0-9A-Fa-f]{6}$/,
         optional: true,
     },
     SIDEBAR_BACKGROUND_COLOR: {
-        type: /^#[0-9A-F]{6}$/,
+        type: /^#[0-9A-Fa-f]{6}$/,
         optional: true,
     },
     SIDEBAR_COLOR: {
-        type: /^#[0-9A-F]{6}$/,
+        type: /^#[0-9A-Fa-f]{6}$/,
         optional: true,
     },
     SIDEBAR_COLOR_HOVER: {
-        type: /^#[0-9A-F]{6}$/,
+        type: /^#[0-9A-Fa-f]{6}$/,
         optional: true,
     },
     MAIN_BACKGROUND_COLOR: {
-        type: /^#[0-9A-F]{6}$/,
+        type: /^#[0-9A-Fa-f]{6}$/,
         optional: true,
     },
     MAIN_COLOR: {
-        type: /^#[0-9A-F]{6}$/,
+        type: /^#[0-9A-Fa-f]{6}$/,
         optional: true,
     },
     DATA_PATH: {

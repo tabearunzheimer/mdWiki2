@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  mdwiki:
+    container_name: mdwiki
+    restart: unless-stopped
+    build: .
+    env_file:
+      - sample.env
+    ports:
+      - 3000:3000
+    volumes:
+      - D:/Projekte/Nodejs/mdWiki2/testmd:/testmd:ro

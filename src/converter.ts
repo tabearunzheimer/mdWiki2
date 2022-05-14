@@ -110,7 +110,7 @@ export class MdConverter {
     }
 
     createFrontendFolder(path: string){        
-        const folder = path.replace(/^(?:\w+(?:\\|\/))+/g, "") 
+        const folder = path.replace(/^(?:\\|\/)?(?:\w+(?:\\|\/))+/g, "") 
 
         this.navbar += `<button class="subfolder">${folder}
         <i class="fa fa-caret-left"></i>
