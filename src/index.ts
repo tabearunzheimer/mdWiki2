@@ -11,8 +11,8 @@ let path = require('path');
 
 export const root = __dirname;
 
-const env = load(envSchema)
 
+const env = load(envSchema, path.join(__dirname, "..", "sample.env"))
 
 const app = express();
 const server = require('http').createServer(app);
@@ -23,7 +23,7 @@ const renderedPath = env.RENDER_PATH;
 
 const ws = new WS(server);
 
-const converter = new MdConverter(sourcePath, renderedPath, ws);
+const converter = new MdConverter(sourcePath, renderedPath, ws, env.TITLE);
 createCustomTemplate(env);
 
 app.use(express.static(path.join(__dirname, '..', 'public')))
@@ -32,7 +32,7 @@ app.get("/:dok", async (req: Request, res: Response) => {
   const dok = req.params.dok;
   if (!converter.index[dok]) res.status(500).json("Couldn't find file")
   else {
-    const file = path.join(__dirname, "..", converter.index[dok]);
+    const file = converter.index[dok];
     console.info(`Loading file ${file}`);
     res.setHeader("page-value", dok);
     res.sendFile(file);

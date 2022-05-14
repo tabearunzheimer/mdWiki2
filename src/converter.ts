@@ -12,16 +12,19 @@ export class MdConverter {
     public index: {[key:number]: any};
     private navbar: string;
     private ws: WS;
+    private custom_title;
 
-    constructor(source: string, targetPath: string, io: WS) {
+    constructor(source: string, targetPath: string, io: WS, custom_title: string) {
         this.converter = new showdown.Converter();
         this.source = source.replace(/\\/g, "/").replace(/^\.\//, ""); //if './' in path remove
         this.target = targetPath.replace(/\\/g, "/").replace(/^\.\//, ""); //if './' in path remove
         this.index = {};
         this.navbar = "";
         this.ws = io;
+        this.custom_title = custom_title;
+        this.target = path.join(__dirname, "..", this.target)
         const exists = this.checkFolder(this.target);
-        if (exists) this.readFolder(source);
+        if (exists) this.readFolder(this.source);
         this.createNavBar();
         
     }
@@ -36,7 +39,7 @@ export class MdConverter {
 
     checkFolder(path: string) {
         if (!fs.existsSync(path)) {
-            console.error("Directory not found");
+            console.error(`Directory ${path} not found`);
             return false;
         }
         return true;
@@ -46,7 +49,10 @@ export class MdConverter {
         const htmlpath = path.join(__dirname, "..", "templates", "index.html")
         const buffer = fs.readFileSync(htmlpath);
         const file = buffer.toString();
-        var result = file.replace("<!--SIDENAV_REPLACE-->", this.navbar);
+        let result = file.replace("<!--SIDENAV_REPLACE-->", this.navbar);
+        if (this.custom_title != "mdWiki") {
+            result = result.replace(/mdWiki/g, this.custom_title);
+        }       
         fs.writeFileSync(path.join(__dirname, "..", "public", "index.html"), result, 'utf8');
     }
 

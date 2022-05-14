@@ -31,7 +31,7 @@ export const envSchema: EnvSchema = {
     },
     DATA_PATH: {
         type: String,
-        default: "./testmd",
+        default: "/testmd",
     },
     PORT: {
         type: Number,
@@ -43,7 +43,7 @@ export const envSchema: EnvSchema = {
     },
     RENDER_PATH: {
         type: String,
-        default: "./rendered",
+        default: "/rendered",
     }
 }
 export const default_css = {

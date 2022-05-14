@@ -5,8 +5,10 @@ services:
     container_name: mdwiki
     restart: unless-stopped
     build: .
-    env_file:
-      - sample.env
+    #env_file:
+    #  - sample.env
+    environment:
+      - TITLE=MY AWESOME WIKI
     ports:
       - 3000:3000
     volumes:
