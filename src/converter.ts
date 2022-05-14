@@ -36,7 +36,7 @@ export class MdConverter {
 
     checkFolder(path: string) {
         if (!fs.existsSync(path)) {
-            console.error("Directory not found");
+            console.error("Directory not found", path);
             return false;
         }
         return true;
