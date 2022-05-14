@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+header{
+    padding-left: 10px;
+    position: relative;
+    width: 100%;
+    height: 70px;
+    background-color: #1B1A59; /* HEADER_BACKGROUND_COLOR */
+    color: white; /* HEADER_COLOR */
+    line-height: 70px;
+    font-size: 40px;
+}
+
+/* The sidebar menu */
+#sidenav {
+    margin-top: 70px;
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* SIDEBAR_BACKGROUND_COLOR */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+    font-size: 18px;
+  }
+
+  .subfolder{
+    font-size: 18px;
+  }
+
+
+  /* The navigation menu links */
+  #sidenav .docEntry, #sidenav .subfolder {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    color: #818181; /* SIDEBAR_COLOR */
+    display: block;
+    border: none;
+    background: none;
+    width:100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  #sidenav .docEntry:hover, #sidenav .subfolder:hover, .dropdown-container div:hover {
+    color: #f1f1f1; /* SIDEBAR_COLOR_HOVER */
+  }
+  
+  /* Style page content */
+  #main {
+    margin-left: 180px; /* Same as the width of the sidebar */
+    padding: 12px 10px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav .docEntry, #sidenav .subfolder {font-size: 18px;}
+  }
+
+  /* Add an active class to the active dropdown button */
+.active {
+    background-color: green;
+    color: white;
+  }
+
+  .dropdown-container{
+    display: none;
+  }
+
+  .dropdown-container div {
+    color: #818181; /* SIDEBAR_COLOR */
+    padding: 6px;
+    padding-left: 30px;
+  }
+
+  .fa {
+    position: absolute;
+    right: 0;
+    padding-right: 8px;
+}
+
+.hide{
+    display: none!important;
+}
