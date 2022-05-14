@@ -44,6 +44,18 @@ export const envSchema: EnvSchema = {
     RENDER_PATH: {
         type: String,
         default: "/rendered",
+    },
+    LOGO: {
+        type: String,
+        optional: true,
+    },
+    HEADER_CUSTOM_FONT: {
+        type: String,
+        optional: true,
+    },
+    HEADER_CUSTOM_FONT_SIZE: {
+        type: String,
+        optional: true,
     }
 }
 export const default_css = {

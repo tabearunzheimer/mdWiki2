@@ -3,13 +3,19 @@ version: "3"
 services:
   mdwiki:
     container_name: mdwiki
+    iamge: tabearunzheimer/mdwiki:latest
     restart: unless-stopped
-    build: .
+    #build: .
     #env_file:
     #  - sample.env
     environment:
       - TITLE=MY AWESOME WIKI
+      - HEADER_CUSTOM_FONT=techno_hideo.ttf
+      - HEADER_CUSTOM_FONT_SIZE=50px
+      - LOGO=logo.png
     ports:
       - 3000:3000
     volumes:
       - D:/Projekte/Nodejs/mdWiki2/testmd:/testmd:ro
+      - D:/Projekte/Nodejs/mdWiki2/techno_hideo.ttf:/usr/src/app/techno_hideo.ttf:ro
+      - D:/Projekte/Nodejs/mdWiki2/logo.png:/usr/src/app/logo.png:ro

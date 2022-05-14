@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@font-face {
+	font-family: "Custom Font";
+	font-weight: 125 950;
+	font-stretch: 75% 125%;
+	font-style: oblique 0deg 12deg;
+	src: url("REPLACE_FONT_PATH") format("woff2-variations");
+}
 
 body{
     margin: 0;
@@ -14,7 +21,14 @@ header{
     background-color: #1B1A59; /* HEADER_BACKGROUND_COLOR */
     color: white; /* HEADER_COLOR */
     line-height: 70px;
-    font-size: 40px;
+    font-size: 40px; /* HEADER_CUSTOM_FONT_SIZE */
+    font-family: 'Custom Font';
+}
+
+#logo{
+  height: 70px;
+  float: left;
+  color: white; /* HEADER_COLOR */
 }
 
 /* The sidebar menu */

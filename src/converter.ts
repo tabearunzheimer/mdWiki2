@@ -13,8 +13,9 @@ export class MdConverter {
     private navbar: string;
     private ws: WS;
     private custom_title;
+    private logo;
 
-    constructor(source: string, targetPath: string, io: WS, custom_title: string) {
+    constructor(source: string, targetPath: string, io: WS, custom_title: string, logo: string) {
         this.converter = new showdown.Converter();
         this.source = source.replace(/\\/g, "/").replace(/^\.\//, ""); //if './' in path remove
         this.target = targetPath.replace(/\\/g, "/").replace(/^\.\//, ""); //if './' in path remove
@@ -22,6 +23,7 @@ export class MdConverter {
         this.navbar = "";
         this.ws = io;
         this.custom_title = custom_title;
+        this.logo = logo;
         this.target = path.join(__dirname, "..", this.target)
         const exists = this.checkFolder(this.target);
         if (exists) this.readFolder(this.source);
@@ -52,7 +54,13 @@ export class MdConverter {
         let result = file.replace("<!--SIDENAV_REPLACE-->", this.navbar);
         if (this.custom_title != "mdWiki") {
             result = result.replace(/mdWiki/g, this.custom_title);
-        }       
+        }
+        if (this.logo) {
+            fs.copyFile(path.join(__dirname, "..", this.logo), path.join(__dirname, "..", "public", this.logo), (err) => {
+                console.error(err);
+            });
+            result = result.replace(/<img id="logo">/g, `<img id="logo" src='./${this.logo}'/>`);
+        }     
         fs.writeFileSync(path.join(__dirname, "..", "public", "index.html"), result, 'utf8');
     }
 

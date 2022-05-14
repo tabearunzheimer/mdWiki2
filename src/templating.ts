@@ -41,5 +41,14 @@ function checkColorEnvs(file: string, env: Env) {
     if (env.SIDEBAR_COLOR_HOVER && (env.SIDEBAR_COLOR_HOVER != default_css.sidebar_color_hover)) {
         file = file.replace(/\#[a-fA-F0-9]{6}\s*\;\s*\/\*\s*SIDEBAR_COLOR_HOVER\s*\*\//g, `${env.SIDEBAR_COLOR_HOVER};`)
     }  
+    if (env.HEADER_CUSTOM_FONT) {
+        fs.copyFile(path.join(__dirname, "..", env.HEADER_CUSTOM_FONT), path.join(__dirname, "..", "public", env.HEADER_CUSTOM_FONT), (err) => {
+            console.error(err);
+        });
+        file = file.replace(/REPLACE_FONT_PATH/g, `./${env.HEADER_CUSTOM_FONT}`)
+    }
+    if (env.HEADER_CUSTOM_FONT_SIZE) {        
+        file = file.replace(/\d+px\s*\;\s*\/\*\s*HEADER_CUSTOM_FONT_SIZE\s*\*\//g, `${env.HEADER_CUSTOM_FONT_SIZE};`)
+    }
     return file;
 }
