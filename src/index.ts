@@ -23,7 +23,7 @@ const renderedPath = env.RENDER_PATH;
 
 const ws = new WS(server);
 
-const converter = new MdConverter(sourcePath, renderedPath, ws, env.TITLE, env.LOGO);
+const converter = new MdConverter(sourcePath, renderedPath, ws, env.TITLE, env.LOGO, env.SERVER_IP);
 createCustomTemplate(env);
 
 app.use(express.static(path.join(__dirname, '..', 'public')))

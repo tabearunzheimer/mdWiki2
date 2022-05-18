@@ -49,4 +49,37 @@ Gentis auxiliaribus odium, *mox* suo videri, imagine armis, cum. Umbra Penthea
 pudor *succidere aequore*! Nec et tergo intertextos quam dumque ama, ille et
 quae statque orbum magni flammas ibat. Stygio unda, oculis posse dissuaserat
 certe Hyantea. Pro restet *erat*; vultusque *canum unde auditis* in Phoebe
-Bacchus nec sic.
+Bacchus nec sic. Some `{ key: 123}` haha 
+
+```
+version: "3.5"
+
+services:
+  glances: 
+    image: nicolargo/glances:3.2.0-full
+    container_name: glances
+    volumes:  
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - 61208:61208
+    restart: unless-stopped
+    environment:
+      - GLANCES_OPT=-w
+    pid:
+      host
+```
+
+```
+function createCodeMarks() {
+    const main = document.getElementById("main");
+    const allcodes = main.getElementsByTagName("code");
+    for (let code of allcodes) {
+        for (let keyword of keywords){
+            code.innerHTML = code.innerHTML.replace(keyword, `<mark>$1</mark>`)
+        }
+    }    
+    allcodes.foreach(code => {
+      code.innerHTML = code.innerHTML.replace(keyword, `<mark>$1</mark>`)
+    })
+}
+```

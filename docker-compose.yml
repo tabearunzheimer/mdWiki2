@@ -13,6 +13,7 @@ services:
       - HEADER_CUSTOM_FONT=techno_hideo.ttf
       - HEADER_CUSTOM_FONT_SIZE=50px
       - LOGO=logo.png
+      - SERVER_IP=localhost
     ports:
       - 3000:3000
     volumes:

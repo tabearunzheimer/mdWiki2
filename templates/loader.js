@@ -50,6 +50,7 @@ function loadPageContent(page, node) {
       const active = document.getElementsByClassName("active-doc")
       if (active.length != 0) active[0].classList.remove("active-doc");
       if (node) node.classList.add("active-doc");
+      createCodeMarks();
     })
 }
 

@@ -29,6 +29,10 @@ export const envSchema: EnvSchema = {
         type: /^#[0-9A-Fa-f]{6}$/,
         optional: true,
     },
+    CODE_HIGHLIGHTING_COLOR:{
+        type: /^#[0-9A-Fa-f]{6}$/,
+        optional: true,
+    },
     DATA_PATH: {
         type: String,
         default: "/testmd",
@@ -56,6 +60,10 @@ export const envSchema: EnvSchema = {
     HEADER_CUSTOM_FONT_SIZE: {
         type: String,
         optional: true,
+    },
+    SERVER_IP: {
+        type: String,
+        optional: false,
     }
 }
 export const default_css = {

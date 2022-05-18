@@ -17,9 +17,12 @@ export function createCustomTemplate(env: Env) {
     fs.copyFile(path.join(__dirname, "..", "templates", "loader.js"), path.join(__dirname, "..", "public", "loader.js"), (err) => {
         console.error(err);
     });
+    fs.copyFile(path.join(__dirname, "..", "templates", "customcode.js"), path.join(__dirname, "..", "public", "customcode.js"), (err) => {
+        console.error(err);
+    });
 }
 
-function checkColorEnvs(file: string, env: Env) {    
+function checkColorEnvs(file: string, env: Env) {     
     if (env.MAIN_COLOR && (env.MAIN_COLOR != default_css.main_color)) {
         file = file.replace(/\#[a-fA-F0-9]{6}\s*\;\s*\/\*\s*MAIN_COLOR\s*\*\//g, `${env.MAIN_COLOR};`)
     }
@@ -50,5 +53,8 @@ function checkColorEnvs(file: string, env: Env) {
     if (env.HEADER_CUSTOM_FONT_SIZE) {        
         file = file.replace(/\d+px\s*\;\s*\/\*\s*HEADER_CUSTOM_FONT_SIZE\s*\*\//g, `${env.HEADER_CUSTOM_FONT_SIZE};`)
     }
+    if (env.CODE_HIGHLIGHTING_COLOR) {
+        file = file.replace(/\#[a-fA-F0-9]{6}\s*\;\s*\/\*\s*CODE_HIGHLIGHTING_COLOR\s*\*\//g, `${env.CODE_HIGHLIGHTING_COLOR};`)
+    }    
     return file;
 }

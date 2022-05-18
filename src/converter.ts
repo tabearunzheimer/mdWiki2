@@ -14,8 +14,9 @@ export class MdConverter {
     private ws: WS;
     private custom_title;
     private logo;
+    private ip;
 
-    constructor(source: string, targetPath: string, io: WS, custom_title: string, logo: string) {
+    constructor(source: string, targetPath: string, io: WS, custom_title: string, logo: string, ip: string) {
         this.converter = new showdown.Converter();
         this.source = source.replace(/\\/g, "/").replace(/^\.\//, ""); //if './' in path remove
         this.target = targetPath.replace(/\\/g, "/").replace(/^\.\//, ""); //if './' in path remove
@@ -24,6 +25,7 @@ export class MdConverter {
         this.ws = io;
         this.custom_title = custom_title;
         this.logo = logo;
+        this.ip = ip;
         this.target = path.join(__dirname, "..", this.target)
         const exists = this.checkFolder(this.target);
         if (exists) this.readFolder(this.source);
@@ -55,6 +57,7 @@ export class MdConverter {
         if (this.custom_title != "mdWiki") {
             result = result.replace(/mdWiki/g, this.custom_title);
         }
+        result = result.replace(/localhost/, this.ip);
         if (this.logo) {
             fs.copyFile(path.join(__dirname, "..", this.logo), path.join(__dirname, "..", "public", this.logo), (err) => {
                 console.error(err);
