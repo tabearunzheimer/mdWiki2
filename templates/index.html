@@ -49,7 +49,7 @@
         <script type="module">
             import { io } from "https://cdn.socket.io/4.4.1/socket.io.esm.min.js";
           
-            const socket = io("http://localhost:3000");
+            const socket = io(location.host);
           
             socket.emit("test", "testmsg")
             socket.on("update", (data) => location.reload())
