@@ -3,7 +3,7 @@ version: "3"
 services:
   mdwiki:
     container_name: mdwiki
-    iamge: tabearunzheimer/mdwiki:latest
+    image: tabearunzheimer/mdwiki:1.4.0
     restart: unless-stopped
     #build: .
     #env_file:
@@ -14,6 +14,8 @@ services:
       - HEADER_CUSTOM_FONT_SIZE=50px
       - LOGO=logo.png
       - SERVER_IP=localhost
+      - DATA_PATH=./testmd
+      - RENDER_PATH=./rendered
     ports:
       - 3000:3000
     volumes:
