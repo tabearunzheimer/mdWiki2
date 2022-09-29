@@ -17,7 +17,7 @@ export class MdConverter {
     private ip;
 
     constructor(source: string, targetPath: string, io: WS, custom_title: string, logo: string, ip: string) {
-        this.converter = new showdown.Converter();
+        this.converter = new showdown.Converter({'tables': 'true'});
         this.source = source.replace(/\\/g, "/").replace(/^\.\//, ""); //if './' in path remove
         this.target = targetPath.replace(/\\/g, "/").replace(/^\.\//, ""); //if './' in path remove
         this.index = {};
